@@ -15,13 +15,6 @@ You need an AWS account with:
 - Amazon Bedrock model access enabled for Claude Sonnet (`us.anthropic.claude-sonnet-4-20250514-v1:0`)
 - IAM permissions for AgentCore, ECR, Cognito, KMS, and CloudWatch Logs
 
-### Enable Bedrock model access
-
-1. Open the [Amazon Bedrock console](https://console.aws.amazon.com/bedrock/)
-2. Go to **Model access** in the left nav
-3. Request access to **Anthropic Claude Sonnet**
-4. Wait for approval (usually instant)
-
 ### Configure AWS credentials
 
 ```bash
@@ -34,8 +27,8 @@ export AWS_SESSION_TOKEN=<your-token>  # if using temporary credentials
 ## Clone the repo
 
 ```bash
-git clone https://github.com/<org>/agentcore-multiagent-workshop.git
-cd agentcore-multiagent-workshop
+git clone https://github.com/aws-samples/sample-multi-agent-framework-protocol-agentcore-workshop
+cd sample-multi-agent-framework-protocol-agentcore-workshop
 ```
 
 ## Create a virtual environment
