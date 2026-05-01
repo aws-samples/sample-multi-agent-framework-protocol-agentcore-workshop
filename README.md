@@ -90,8 +90,8 @@ agentcore-multiagent-workshop/
 
 ```bash
 # Clone the repo
-git clone https://github.com/<org>/agentcore-multiagent-workshop.git
-cd agentcore-multiagent-workshop
+git clone https://github.com/aws-samples/sample-multi-agent-framework-protocol-agentcore-workshop
+cd sample-multi-agent-framework-protocol-agentcore-workshop
 ```
 
 ## 👉 Start Here
