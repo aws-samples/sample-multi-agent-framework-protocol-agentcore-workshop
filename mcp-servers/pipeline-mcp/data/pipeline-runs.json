@@ -1,0 +1,77 @@
+[
+  {
+    "run_id": "RUN-1001",
+    "pipeline_id": "PL-001",
+    "pipeline_name": "customer_orders",
+    "status": "FAILED",
+    "started_at": "2026-04-10T02:00:15Z",
+    "ended_at": "2026-04-10T02:12:43Z",
+    "duration_seconds": 748,
+    "error_message": "SchemaValidationError: Column 'discount_type' not found in target schema. Source has 15 columns, target expects 14.",
+    "input_records": 45230,
+    "output_records": 0,
+    "dpu_hours": 2.5,
+    "logs": [
+      {"timestamp": "2026-04-10T02:00:15Z", "level": "INFO", "message": "Starting pipeline customer_orders (RUN-1001)"},
+      {"timestamp": "2026-04-10T02:00:18Z", "level": "INFO", "message": "Reading from s3://raw-events/orders/2026/04/09/"},
+      {"timestamp": "2026-04-10T02:01:30Z", "level": "INFO", "message": "Read 45230 records from source"},
+      {"timestamp": "2026-04-10T02:05:00Z", "level": "INFO", "message": "Applying transformations"},
+      {"timestamp": "2026-04-10T02:10:20Z", "level": "WARN", "message": "Schema mismatch detected: source column 'discount_type' (VARCHAR) not in target schema"},
+      {"timestamp": "2026-04-10T02:12:40Z", "level": "ERROR", "message": "SchemaValidationError: Column 'discount_type' not found in target schema."},
+      {"timestamp": "2026-04-10T02:12:43Z", "level": "ERROR", "message": "Pipeline failed. 0 records written. Rolling back."}
+    ]
+  },
+  {
+    "run_id": "RUN-1000",
+    "pipeline_id": "PL-001",
+    "pipeline_name": "customer_orders",
+    "status": "SUCCEEDED",
+    "started_at": "2026-04-09T02:00:10Z",
+    "ended_at": "2026-04-09T02:08:55Z",
+    "duration_seconds": 525,
+    "error_message": null,
+    "input_records": 42100,
+    "output_records": 42100,
+    "dpu_hours": 2.1,
+    "logs": [
+      {"timestamp": "2026-04-09T02:00:10Z", "level": "INFO", "message": "Starting pipeline customer_orders (RUN-1000)"},
+      {"timestamp": "2026-04-09T02:08:55Z", "level": "INFO", "message": "Pipeline completed. 42100 records written."}
+    ]
+  },
+  {
+    "run_id": "RUN-2005",
+    "pipeline_id": "PL-002",
+    "pipeline_name": "product_catalog_sync",
+    "status": "SUCCEEDED",
+    "started_at": "2026-04-10T04:00:05Z",
+    "ended_at": "2026-04-10T04:03:20Z",
+    "duration_seconds": 195,
+    "error_message": null,
+    "input_records": 8500,
+    "output_records": 8500,
+    "dpu_hours": 0.8,
+    "logs": [
+      {"timestamp": "2026-04-10T04:00:05Z", "level": "INFO", "message": "Starting pipeline product_catalog_sync (RUN-2005)"},
+      {"timestamp": "2026-04-10T04:03:20Z", "level": "INFO", "message": "Pipeline completed. 8500 records written."}
+    ]
+  },
+  {
+    "run_id": "RUN-5002",
+    "pipeline_id": "PL-005",
+    "pipeline_name": "inventory_snapshot",
+    "status": "FAILED",
+    "started_at": "2026-04-10T01:00:08Z",
+    "ended_at": "2026-04-10T01:15:30Z",
+    "duration_seconds": 922,
+    "error_message": "TimeoutError: Source query exceeded 900s timeout.",
+    "input_records": 0,
+    "output_records": 0,
+    "dpu_hours": 3.0,
+    "logs": [
+      {"timestamp": "2026-04-10T01:00:08Z", "level": "INFO", "message": "Starting pipeline inventory_snapshot (RUN-5002)"},
+      {"timestamp": "2026-04-10T01:00:12Z", "level": "INFO", "message": "Executing source query against inventory_live"},
+      {"timestamp": "2026-04-10T01:15:28Z", "level": "ERROR", "message": "TimeoutError: Source query exceeded 900s timeout"},
+      {"timestamp": "2026-04-10T01:15:30Z", "level": "ERROR", "message": "Pipeline failed. 0 records written."}
+    ]
+  }
+]

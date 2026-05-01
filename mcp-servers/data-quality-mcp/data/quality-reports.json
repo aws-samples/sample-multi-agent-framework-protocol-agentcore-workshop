@@ -1,0 +1,49 @@
+[
+  {
+    "table": "warehouse.orders.customer_orders",
+    "last_checked": "2026-04-09T06:00:00Z",
+    "overall_score": 94.2,
+    "rules": [
+      {"rule": "not_null", "column": "order_id", "passed": true, "details": "0 nulls out of 42100 rows"},
+      {"rule": "not_null", "column": "customer_id", "passed": true, "details": "0 nulls out of 42100 rows"},
+      {"rule": "unique", "column": "order_id", "passed": true, "details": "42100 unique values out of 42100 rows"},
+      {"rule": "freshness", "column": "updated_at", "passed": true, "details": "Latest record: 2026-04-09T01:58:00Z (within 24h threshold)"},
+      {"rule": "range_check", "column": "total_amount", "passed": true, "details": "All values between 0.01 and 99999.99"},
+      {"rule": "referential_integrity", "column": "customer_id", "passed": false, "details": "23 orphaned customer_ids not found in warehouse.customers.profiles"}
+    ]
+  },
+  {
+    "table": "warehouse.events.user_activity",
+    "last_checked": "2026-04-10T05:00:00Z",
+    "overall_score": 98.7,
+    "rules": [
+      {"rule": "not_null", "column": "event_id", "passed": true, "details": "0 nulls out of 1250000 rows"},
+      {"rule": "not_null", "column": "user_id", "passed": true, "details": "0 nulls out of 1250000 rows"},
+      {"rule": "freshness", "column": "event_timestamp", "passed": true, "details": "Latest record: 2026-04-10T04:59:00Z"},
+      {"rule": "enum_check", "column": "event_type", "passed": true, "details": "All values in allowed set: [page_view, click, purchase, signup, logout]"}
+    ]
+  },
+  {
+    "table": "warehouse.products.catalog",
+    "last_checked": "2026-04-10T05:30:00Z",
+    "overall_score": 87.5,
+    "rules": [
+      {"rule": "not_null", "column": "product_id", "passed": true, "details": "0 nulls out of 8500 rows"},
+      {"rule": "unique", "column": "product_id", "passed": true, "details": "8500 unique values"},
+      {"rule": "not_null", "column": "price", "passed": false, "details": "12 nulls out of 8500 rows (0.14%)"},
+      {"rule": "not_null", "column": "category", "passed": false, "details": "45 nulls out of 8500 rows (0.53%)"},
+      {"rule": "range_check", "column": "price", "passed": true, "details": "All non-null values between 0.01 and 9999.99"}
+    ]
+  },
+  {
+    "table": "warehouse.operations.inventory_live",
+    "last_checked": "2026-04-10T02:00:00Z",
+    "overall_score": 72.0,
+    "rules": [
+      {"rule": "not_null", "column": "sku", "passed": true, "details": "0 nulls out of 350000 rows"},
+      {"rule": "freshness", "column": "updated_at", "passed": false, "details": "Latest record: 2026-04-08T23:00:00Z (stale by 27 hours, threshold: 24h)"},
+      {"rule": "row_count", "column": null, "passed": false, "details": "350000 rows, expected >= 400000 based on 30-day average"},
+      {"rule": "duplicate_check", "column": "sku", "passed": false, "details": "1200 duplicate SKUs found across warehouse locations"}
+    ]
+  }
+]

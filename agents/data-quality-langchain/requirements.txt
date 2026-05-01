@@ -1,0 +1,11 @@
+langchain==1.2.15
+langchain-aws==1.4.5
+langchain-community==0.4.1
+langgraph==1.1.10
+langchain-mcp-adapters==0.2.2
+mcp==1.27.0
+httpx==0.28.1
+bedrock-agentcore==1.7.0
+aws-opentelemetry-distro==0.17.0
+opentelemetry-instrumentation-langchain>=0.60.0
+python-dotenv==1.2.2

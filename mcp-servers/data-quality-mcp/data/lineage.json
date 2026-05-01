@@ -1,0 +1,43 @@
+[
+  {
+    "table": "warehouse.orders.customer_orders",
+    "upstream": [
+      {"source": "s3://raw-events/orders/", "type": "s3", "pipeline": "customer_orders (PL-001)"}
+    ],
+    "downstream": [
+      {"target": "warehouse.analytics.revenue_daily", "type": "table", "pipeline": "revenue_rollup (PL-010)"},
+      {"target": "warehouse.analytics.customer_ltv", "type": "table", "pipeline": "ltv_calculation (PL-011)"},
+      {"target": "warehouse.reporting.order_summary", "type": "table", "pipeline": "reporting_refresh (PL-012)"}
+    ]
+  },
+  {
+    "table": "warehouse.events.user_activity",
+    "upstream": [
+      {"source": "kinesis://user-events-stream", "type": "kinesis", "pipeline": "event_ingestion (PL-020)"}
+    ],
+    "downstream": [
+      {"target": "warehouse.analytics.activity_rollup", "type": "table", "pipeline": "user_activity_rollup (PL-003)"},
+      {"target": "warehouse.analytics.funnel_metrics", "type": "table", "pipeline": "funnel_analysis (PL-021)"}
+    ]
+  },
+  {
+    "table": "warehouse.products.catalog",
+    "upstream": [
+      {"source": "api://product-service/v2/catalog", "type": "api", "pipeline": "product_catalog_sync (PL-002)"}
+    ],
+    "downstream": [
+      {"target": "warehouse.analytics.revenue_daily", "type": "table", "pipeline": "revenue_rollup (PL-010)"},
+      {"target": "warehouse.reporting.product_performance", "type": "table", "pipeline": "product_reporting (PL-030)"}
+    ]
+  },
+  {
+    "table": "warehouse.operations.inventory_live",
+    "upstream": [
+      {"source": "rds://inventory-db/public.inventory", "type": "rds", "pipeline": "inventory_cdc (PL-040)"}
+    ],
+    "downstream": [
+      {"target": "warehouse.operations.inventory_daily", "type": "table", "pipeline": "inventory_snapshot (PL-005)"},
+      {"target": "warehouse.analytics.supply_chain_metrics", "type": "table", "pipeline": "supply_chain_rollup (PL-041)"}
+    ]
+  }
+]

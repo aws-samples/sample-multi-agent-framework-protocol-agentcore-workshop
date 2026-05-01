@@ -1,0 +1,8 @@
+strands-agents==1.37.0
+strands-agents[otel]==1.37.0
+strands-agents-tools==0.5.1
+httpx==0.28.1
+a2a-sdk==0.3.26
+bedrock-agentcore==1.7.0
+aws-opentelemetry-distro==0.17.0
+python-dotenv==1.2.2

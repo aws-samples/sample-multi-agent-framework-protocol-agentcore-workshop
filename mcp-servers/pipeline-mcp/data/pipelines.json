@@ -1,0 +1,67 @@
+[
+  {
+    "pipeline_id": "PL-001",
+    "name": "customer_orders",
+    "description": "Ingests raw order events from S3, transforms and loads into the orders data warehouse",
+    "source": "s3://raw-events/orders/",
+    "target": "warehouse.orders.customer_orders",
+    "schedule": "cron(0 2 * * ? *)",
+    "status": "FAILED",
+    "owner": "data-engineering",
+    "created_at": "2024-06-15T10:00:00Z",
+    "last_run_id": "RUN-1001",
+    "tags": ["production", "critical", "orders"]
+  },
+  {
+    "pipeline_id": "PL-002",
+    "name": "product_catalog_sync",
+    "description": "Syncs product catalog from upstream API to the analytics database",
+    "source": "api://product-service/v2/catalog",
+    "target": "warehouse.products.catalog",
+    "schedule": "cron(0 4 * * ? *)",
+    "status": "SUCCEEDED",
+    "owner": "data-engineering",
+    "created_at": "2024-03-10T08:00:00Z",
+    "last_run_id": "RUN-2005",
+    "tags": ["production", "catalog"]
+  },
+  {
+    "pipeline_id": "PL-003",
+    "name": "user_activity_rollup",
+    "description": "Aggregates daily user activity events into hourly and daily rollup tables",
+    "source": "warehouse.events.user_activity",
+    "target": "warehouse.analytics.activity_rollup",
+    "schedule": "cron(30 3 * * ? *)",
+    "status": "SUCCEEDED",
+    "owner": "analytics-team",
+    "created_at": "2024-01-20T14:00:00Z",
+    "last_run_id": "RUN-3010",
+    "tags": ["production", "analytics"]
+  },
+  {
+    "pipeline_id": "PL-004",
+    "name": "marketing_campaigns",
+    "description": "Loads marketing campaign performance data from the ad platform",
+    "source": "api://ad-platform/campaigns",
+    "target": "warehouse.marketing.campaigns",
+    "schedule": "cron(0 6 * * ? *)",
+    "status": "SUCCEEDED",
+    "owner": "marketing-data",
+    "created_at": "2024-08-01T09:00:00Z",
+    "last_run_id": "RUN-4003",
+    "tags": ["production", "marketing"]
+  },
+  {
+    "pipeline_id": "PL-005",
+    "name": "inventory_snapshot",
+    "description": "Takes a daily snapshot of inventory levels across all warehouses",
+    "source": "warehouse.operations.inventory_live",
+    "target": "warehouse.operations.inventory_daily",
+    "schedule": "cron(0 1 * * ? *)",
+    "status": "FAILED",
+    "owner": "data-engineering",
+    "created_at": "2024-05-12T11:00:00Z",
+    "last_run_id": "RUN-5002",
+    "tags": ["production", "operations", "critical"]
+  }
+]

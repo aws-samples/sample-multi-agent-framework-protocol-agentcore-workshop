@@ -1,0 +1,86 @@
+[
+  {
+    "database": "warehouse",
+    "schema": "orders",
+    "table": "customer_orders",
+    "columns": [
+      {"name": "order_id", "type": "VARCHAR(36)", "nullable": false, "description": "Unique order identifier (UUID)"},
+      {"name": "customer_id", "type": "VARCHAR(36)", "nullable": false, "description": "Customer identifier"},
+      {"name": "order_date", "type": "TIMESTAMP", "nullable": false, "description": "When the order was placed"},
+      {"name": "status", "type": "VARCHAR(20)", "nullable": false, "description": "Order status: pending, confirmed, shipped, delivered, cancelled"},
+      {"name": "total_amount", "type": "DECIMAL(10,2)", "nullable": false, "description": "Total order amount"},
+      {"name": "currency", "type": "VARCHAR(3)", "nullable": false, "description": "ISO currency code"},
+      {"name": "items_count", "type": "INTEGER", "nullable": false, "description": "Number of items in the order"},
+      {"name": "shipping_address", "type": "VARCHAR(500)", "nullable": true, "description": "Delivery address"},
+      {"name": "payment_method", "type": "VARCHAR(50)", "nullable": false, "description": "Payment method used"},
+      {"name": "channel", "type": "VARCHAR(20)", "nullable": false, "description": "Order channel: web, mobile, api"},
+      {"name": "promo_code", "type": "VARCHAR(50)", "nullable": true, "description": "Applied promotion code"},
+      {"name": "created_at", "type": "TIMESTAMP", "nullable": false, "description": "Record creation timestamp"},
+      {"name": "updated_at", "type": "TIMESTAMP", "nullable": false, "description": "Last update timestamp"},
+      {"name": "partition_date", "type": "DATE", "nullable": false, "description": "Partition key (order date)"}
+    ],
+    "row_count": 42100,
+    "size_mb": 285,
+    "last_updated": "2026-04-09T02:08:55Z",
+    "partitioned_by": ["partition_date"],
+    "description": "Customer order records from all channels"
+  },
+  {
+    "database": "warehouse",
+    "schema": "events",
+    "table": "user_activity",
+    "columns": [
+      {"name": "event_id", "type": "VARCHAR(36)", "nullable": false, "description": "Unique event identifier"},
+      {"name": "user_id", "type": "VARCHAR(36)", "nullable": false, "description": "User identifier"},
+      {"name": "event_type", "type": "VARCHAR(20)", "nullable": false, "description": "Event type: page_view, click, purchase, signup, logout"},
+      {"name": "event_timestamp", "type": "TIMESTAMP", "nullable": false, "description": "When the event occurred"},
+      {"name": "page_url", "type": "VARCHAR(2000)", "nullable": true, "description": "Page URL for web events"},
+      {"name": "session_id", "type": "VARCHAR(36)", "nullable": false, "description": "Browser/app session ID"},
+      {"name": "device_type", "type": "VARCHAR(20)", "nullable": true, "description": "Device: desktop, mobile, tablet"},
+      {"name": "partition_date", "type": "DATE", "nullable": false, "description": "Partition key"}
+    ],
+    "row_count": 1250000,
+    "size_mb": 4200,
+    "last_updated": "2026-04-10T04:59:00Z",
+    "partitioned_by": ["partition_date"],
+    "description": "Raw user activity events from web and mobile"
+  },
+  {
+    "database": "warehouse",
+    "schema": "products",
+    "table": "catalog",
+    "columns": [
+      {"name": "product_id", "type": "VARCHAR(36)", "nullable": false, "description": "Unique product identifier"},
+      {"name": "name", "type": "VARCHAR(200)", "nullable": false, "description": "Product name"},
+      {"name": "category", "type": "VARCHAR(100)", "nullable": true, "description": "Product category"},
+      {"name": "price", "type": "DECIMAL(10,2)", "nullable": true, "description": "Current price"},
+      {"name": "currency", "type": "VARCHAR(3)", "nullable": false, "description": "ISO currency code"},
+      {"name": "in_stock", "type": "BOOLEAN", "nullable": false, "description": "Whether the product is in stock"},
+      {"name": "created_at", "type": "TIMESTAMP", "nullable": false, "description": "When the product was added"},
+      {"name": "updated_at", "type": "TIMESTAMP", "nullable": false, "description": "Last update timestamp"}
+    ],
+    "row_count": 8500,
+    "size_mb": 45,
+    "last_updated": "2026-04-10T04:03:20Z",
+    "partitioned_by": [],
+    "description": "Product catalog synced from the product service API"
+  },
+  {
+    "database": "warehouse",
+    "schema": "operations",
+    "table": "inventory_live",
+    "columns": [
+      {"name": "sku", "type": "VARCHAR(50)", "nullable": false, "description": "Stock keeping unit"},
+      {"name": "warehouse_id", "type": "VARCHAR(20)", "nullable": false, "description": "Warehouse location ID"},
+      {"name": "quantity", "type": "INTEGER", "nullable": false, "description": "Current quantity on hand"},
+      {"name": "reorder_point", "type": "INTEGER", "nullable": false, "description": "Minimum quantity before reorder"},
+      {"name": "last_received", "type": "TIMESTAMP", "nullable": true, "description": "Last inventory receipt date"},
+      {"name": "updated_at", "type": "TIMESTAMP", "nullable": false, "description": "Last update timestamp"}
+    ],
+    "row_count": 350000,
+    "size_mb": 120,
+    "last_updated": "2026-04-08T23:00:00Z",
+    "partitioned_by": [],
+    "description": "Live inventory levels across all warehouses"
+  }
+]
